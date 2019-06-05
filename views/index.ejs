@@ -40,56 +40,16 @@
           mapTypeControl: false,
           mapTypeId: 'satellite'
         });
-        map.setTilt(45)
-        var iconN = {
-          url: "n.svg",
-          scaledSize: new google.maps.Size(20, 20),
-          origin: new google.maps.Point(0, 0),
-          anchor: new google.maps.Point(0, 0)
-        };
-        var iconNE = {
-          url: "ne.svg",
-          scaledSize: new google.maps.Size(20, 20),
-          origin: new google.maps.Point(0, 0),
-          anchor: new google.maps.Point(0, 0)
-        };
-        var iconE = {
-          url: "e.svg",
-          scaledSize: new google.maps.Size(20, 20),
-          origin: new google.maps.Point(0, 0),
-          anchor: new google.maps.Point(0, 0)
-        };
-        var iconSE = {
-          url: "se.svg",
-          scaledSize: new google.maps.Size(20, 20),
-          origin: new google.maps.Point(0, 0),
-          anchor: new google.maps.Point(0, 0)
-        };
-        var iconS = {
-          url: "s.svg",
-          scaledSize: new google.maps.Size(20, 20),
-          origin: new google.maps.Point(0, 0),
-          anchor: new google.maps.Point(0, 0)
-        };
-        var iconSW = {
-          url: "sw.svg",
-          scaledSize: new google.maps.Size(20, 20),
-          origin: new google.maps.Point(0, 0),
-          anchor: new google.maps.Point(0, 0)
-        };
-        var iconW = {
-          url: "w.svg",
-          scaledSize: new google.maps.Size(20, 20),
-          origin: new google.maps.Point(0, 0),
-          anchor: new google.maps.Point(0, 0)
-        };
-        var iconNW = {
-          url: "nw.svg",
-          scaledSize: new google.maps.Size(20, 20),
-          origin: new google.maps.Point(0, 0),
-          anchor: new google.maps.Point(0, 0)
-        };
         <% for(var i = 0; i<cameras.length; i++){ %>
+          var iconN = {
+          path: "M136.37 220.1L137.9 447.51C138.04 468.32 155.03 485.09 175.85 484.95L403.26 483.42C424.08 483.28 440.85 466.29 440.71 445.47L439.18 218.06C439.04 197.24 422.04 180.48 401.23 180.62L173.82 182.15C153 182.29 136.23 199.28 136.37 220.1L136.37 220.1ZM165.1 70.54L225.29 156.57L349.41 155.73L408.36 68.91C419.76 52.11 407.86 29.16 387.75 29.3L185.18 30.67C165.15 30.81 153.47 53.83 165.11 70.55L165.1 70.54Z",
+          fillColor: "000000",
+          fillOpacity: 1,
+          strokeWeight: 1.8,
+          strokeColor: "white",
+          scale: .04,
+          rotation: <%= cameras[i].Angle %>
+        };
           var contentString<%= i %> = '<h2 style="text-align: center">Info</h2>' +
                                       '<p>Type: <%= cameras[i].TypeMobile %>' +
                                       '<p>Info: <%= cameras[i].CameraINFO %>' +
@@ -100,21 +60,7 @@
           var marker<%= i %> = new google.maps.Marker({
             position: { lat: <%= cameras[i].X %>, lng: <%= cameras[i].Y %> },
             map: map,
-            <% if(cameras[i].Direction == "דרום"){ %>
-              icon: iconS
-            <% } else if(cameras[i].Direction == "דרום מזרח"){ %>
-              icon: iconSE
-            <% } else if(cameras[i].Direction == "דרום מערב"){ %>
-              icon: iconSW
-            <% } else if(cameras[i].Direction == "מזרח"){ %>
-              icon: iconE
-            <% } else if(cameras[i].Direction == "מערב"){ %>
-              icon: iconW
-            <% } else if(cameras[i].Direction == "צפון מערב"){ %>
-              icon: iconNW
-            <% } else { %>
-              icon: iconN
-            <% } %>
+            icon: iconN
           });
           marker<%= i %>.addListener('click', function() {
             infowindow<%= i %>.open(map, marker<%= i %>)
