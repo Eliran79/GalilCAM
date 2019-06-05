@@ -22,10 +22,27 @@
         text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
           1px 1px 0 #000;
       }
+
+      #legend {
+        font-family: Arial, sans-serif;
+        background: #fff;
+        padding: 10px;
+        margin: 10px;
+        border: 3px solid #000;
+        text-align: center;
+      }
+
+      #legend h3 {
+        margin-top: 0;
+      }
+      #legend img {
+        vertical-align: middle;
+      }
     </style>
   </head>
   <body style="background-color: black; font-family: arial">
     <div id="map" style="width:100%; height:100%; z-index: 100"></div>
+    <div id="legend" dir="rtl"><h1>בחר עיר:</h1></div>
     <script
       src="https://code.jquery.com/jquery-3.4.1.js"
       integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
@@ -37,6 +54,7 @@
         map = new google.maps.Map(document.getElementById("map"), {
           center: { lat: 33.0066357, lng: 35.0912991 },
           zoom: 15,
+          minZoom: 14,
           mapTypeControl: false,
           mapTypeId: 'satellite'
         });
@@ -53,7 +71,8 @@
           var contentString<%= i %> = '<h2 style="text-align: center">Info</h2>' +
                                       '<p>Type: <%= cameras[i].TypeMobile %>' +
                                       '<p>Info: <%= cameras[i].CameraINFO %>' +
-                                      '<p>Angle: <%= cameras[i].Angle %>\u00B0'
+                                      '<p>Angle: <%= cameras[i].Angle %>\u00B0' +
+                                      '<p>Coordinates: <%= cameras[i].X %>, <%= cameras[i].Y %>'
           var infowindow<%= i %> = new google.maps.InfoWindow({
             content: contentString<%= i %>
           });
@@ -70,6 +89,20 @@
         var trafficLayer = new google.maps.TrafficLayer();
 
         trafficLayer.setMap(map);
+        var legend = document.getElementById('legend');
+        var div = document.createElement('div');
+        var div2 = document.createElement('div');
+        div.innerHTML = '<h2 id="nahariyya" style="color: blue; text-decoration: underline; cursor: pointer">נהרייה</h2>'
+        div2.innerHTML = '<h2 id="karmiel" style="color: blue; text-decoration: underline; cursor: pointer">כרמיאל</h2>'
+        legend.appendChild(div)
+        legend.appendChild(div2)
+        map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legend);
+        $('#nahariyya').click(() =>{
+          map.setCenter(new google.maps.LatLng(33.0066357, 35.0912991));
+        })
+        $('#karmiel').click(() =>{
+          map.setCenter(new google.maps.LatLng(32.911673, 35.296536));
+        })
       }
     </script>
 
