@@ -21,15 +21,14 @@ app.get("/", (req, res) => {
   res.render("index.ejs", { cameras });
 });
 
-let rawdata = fs.readFileSync("public/cameras.json");
 const polygonJSON = createPolygons();
 console.log(util.inspect(polygonJSON, { depth: null, maxArrayLength: null }));
 
-// let rawdata = fs.readFileSync("public/cameras.json");
-// let cameras = JSON.parse(rawdata);
-// for (var i = 0; i < cameras.length; i++) {
-//   var xy = Math.round(cameras[i].X) + " " + Math.round(cameras[i].Y);
-//   newxy = JSITM.itmRef2gpsRef(xy).split(" ");
-//   cameras[i].X = newxy[0];
-//   cameras[i].Y = newxy[1];
-// }
+let rawdata = fs.readFileSync("public/cameras.json");
+let cameras = JSON.parse(rawdata);
+for (var i = 0; i < cameras.length; i++) {
+  var xy = Math.round(cameras[i].X) + " " + Math.round(cameras[i].Y);
+  newxy = JSITM.itmRef2gpsRef(xy).split(" ");
+  cameras[i].X = newxy[0];
+  cameras[i].Y = newxy[1];
+}
