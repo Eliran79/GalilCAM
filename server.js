@@ -26,3 +26,4 @@ for (var i = 0; i < cameras.length; i++) {
   cameras[i].X = newxy[0];
   cameras[i].Y = newxy[1];
 }
+//abcdabcd dan!
