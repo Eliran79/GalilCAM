@@ -10,8 +10,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static("public"));
 
-app.listen(process.env.PORT || 3003, () => {
-  console.log("listening on 3003");
+app.listen(process.env.PORT || 8080, () => {
+  console.log("listening on 8080");
 });
 
 app.get("/", (req, res) => {
@@ -20,6 +20,7 @@ app.get("/", (req, res) => {
 
 let rawdata = fs.readFileSync("public/cameras.json");
 let cameras = JSON.parse(rawdata);
+
 for (var i = 0; i < cameras.length; i++) {
   var xy = Math.round(cameras[i].X) + " " + Math.round(cameras[i].Y);
   newxy = JSITM.itmRef2gpsRef(xy).split(" ");

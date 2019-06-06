@@ -98,10 +98,10 @@
         legend.appendChild(div2)
         map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legend);
         $('#nahariyya').click(() =>{
-          map.setCenter(new google.maps.LatLng(33.0066357, 35.0912991));
+          map.panTo(new google.maps.LatLng(33.0066357, 35.0912991));
         })
         $('#karmiel').click(() =>{
-          map.setCenter(new google.maps.LatLng(32.911673, 35.296536));
+          map.panTo(new google.maps.LatLng(32.911673, 35.296536));
         })
       }
     </script>
