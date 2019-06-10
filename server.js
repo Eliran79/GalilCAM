@@ -18,7 +18,7 @@ app.listen(process.env.PORT || 8080, () => {
 });
 
 app.get("/", (req, res) => {
-  res.render("index.ejs", { cameras });
+  res.render("index.ejs", { cameras, polygonJSON });
 });
 
 const polygonJSON = createPolygons();
